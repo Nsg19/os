@@ -3,7 +3,7 @@ using namespace std;
 int time=0;
 main()
 {
-	int arrival_time[10],burst_time[10],bt[10],i,j,k,n,time_quantum;
+	int arrival_time[10],burst_time[10],bt[10],i,j,k,n,time_quantum,comming_time[10],flag[10];
 	cout<<"enter no of process\n";
 	cin>>n;
 	cout<<"Enter Time Quantum for all process:\n";
@@ -26,16 +26,26 @@ main()
 	{
 		if(burst_time[k]>=time_quantum)
 		{
-
 			burst_time[k]-=time_quantum;
+			if(flag[k]==0)
+			{
+				if(arrival_time[k]<time)
+				{
+					comming_time[k]=time;
+				}
+				else
+				{
+					comming_time[k]=arrival_time[k];
+					time=arrival_time[k];
+				}
+				flag[k]=1;
+			}
 			time+=time_quantum;
-
 		}
 		else
 		{
 			time=burst_time[k];
 			burst_time[k]=0;
-		}
-		
+		}	
 	}
 }
