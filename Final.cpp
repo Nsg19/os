@@ -4,8 +4,8 @@ using namespace std;
 int time=0;
 class Scheduling
 {	public:
-	int arrival_time[10],at[10],burst_time[10],bt[10],waiting_time[10],cpu_assign_time[10];
-	int process_completion_time[10],flag[10],stop[10],process[10];
+	int arrival_time[20],at[20],burst_time[20],bt[20],waiting_time[20],cpu_assign_time[20];
+	int process_completion_time[20],flag[20],stop[20],process[20];
 };
 
 int q[100];
