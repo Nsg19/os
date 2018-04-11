@@ -138,7 +138,7 @@ while(a[index].burst_time[index]!=0)
 			time=time+a[r].burst_time[r];
 			system("color 2B");
 			cout<<"___|P"<<a[r].process[r]+1<<"|___";
-			//sleep(a[r].burst_time[r]);
+			sleep(a[r].burst_time[r]);
 			a[r].burst_time[r]=0;
 		}
 			
@@ -165,7 +165,7 @@ while(a[index].burst_time[index]!=0)
 				time+=time_quantum;
 			}
 			cout<<"___|P"<<a[r].process[r]+1<<"|___";
-		//	sleep(time_quantum);		
+			sleep(time_quantum);		
 		}
 	
 		if(a[r].burst_time[r]==0&&a[r].stop[r]==0)
@@ -182,17 +182,10 @@ while(a[index].burst_time[index]!=0)
 				push(s);
 				count++;
 			}
-			if(a[s].arrival_time[s]>time&&a[r].flag[r]==1)
-			{
-				push(s);
-				count++;
-			}					
+				
 		}	
 		
-		if(a[r].flag[r]!=1)
-		{
-			push(r);
-		}
+		push(r);
 		jump=count;	
 	}
 }
