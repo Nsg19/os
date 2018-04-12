@@ -4,8 +4,8 @@ using namespace std;
 int time=0;
 class Scheduling
 {	public:
-	int arrival_time[20],at[20],burst_time[20],bt[20],waiting_time[20],cpu_assign_time[20];
-	int process_completion_time[20],flag[20],stop[20],process[20];
+	int arrival_time[10],at[10],burst_time[10],bt[10],waiting_time[10],cpu_assign_time[10];
+	int process_completion_time[10],flag[10],stop[10],process[10];
 };
 
 int q[100];
@@ -53,15 +53,14 @@ main()
 	int sum_bt=0;
 	for(j=0;j<n;j++)
 	{
-		cout<<"Enter CPU Burst for Process-"<<j+1<<":\n";
+		cout<<"\nEnter CPU Burst for Process-"<<j+1<<":\n";
 		cin>>a[j].burst_time[j];
 		a[j].bt[j]=a[j].burst_time[j];
 		a[j].flag[j]=0;
 		a[j].stop[j]=0;
 		sum_bt+=a[j].burst_time[j];
 	}
-	cout<<"\n"<<sum_bt<<"\n";
-	
+		
 	int temp;	
 	for (i=1;i<n;i++)
 	{
@@ -102,13 +101,9 @@ main()
 if(time_quantum!=0)
 {	
 cout<<"\n\n================================================= FINAL RESULT =========================================================\n";
-cout<<"Time Quantum:- "<<time_quantum<<"\n";
+cout<<"\nTime Quantum:- "<<time_quantum<<"\n";
 cout<<"Gantt Chart:-\n\n";
 cout<<"  ";
-if(a[0].arrival_time[0]!=0)
-{
-cout<<"0__ - __";
-}
 
 int count=1;
 int jump=1;
@@ -134,11 +129,13 @@ while(a[index].burst_time[index]!=0)
 				}
 				a[r].flag[r]=1;
 			}
+			cout<<"----";
 			cout<<time;
 			time=time+a[r].burst_time[r];
 			system("color 2B");
 			cout<<"___|P"<<a[r].process[r]+1<<"|___";
 			sleep(a[r].burst_time[r]);
+			cout<<time;
 			a[r].burst_time[r]=0;
 		}
 			
@@ -158,6 +155,7 @@ while(a[index].burst_time[index]!=0)
 				}
 				a[r].flag[r]=1;
 			}
+			cout<<"----";
 			cout<<time;
 			if(a[r].burst_time[r]!=0)
 			{
@@ -165,7 +163,8 @@ while(a[index].burst_time[index]!=0)
 				time+=time_quantum;
 			}
 			cout<<"___|P"<<a[r].process[r]+1<<"|___";
-			sleep(time_quantum);		
+			sleep(time_quantum);
+			cout<<time;			
 		}
 	
 		if(a[r].burst_time[r]==0&&a[r].stop[r]==0)
@@ -182,16 +181,21 @@ while(a[index].burst_time[index]!=0)
 				push(s);
 				count++;
 			}
-				
+			if(a[s].arrival_time[s]>time&&a[r].stop[r]==1)
+			{
+				push(s);
+				count++;
+			}					
 		}	
 		
-		push(r);
+		if(a[r].stop[r]!=1)
+		{
+			push(r);
+		}
 		jump=count;	
 	}
 }
 system("color f3");
-cout<<time;
-
 for(j=0;j<n;j++)
 {
 	a[j].waiting_time[j]=a[j].process_completion_time[j]-a[j].bt[j]-a[j].arrival_time[j];
