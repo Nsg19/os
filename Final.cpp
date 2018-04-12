@@ -1,5 +1,6 @@
 #include<iostream>
 #include<unistd.h>
+#include<windows.h>
 using namespace std;
 int time=0;
 class Scheduling
@@ -170,6 +171,7 @@ while(a[index].burst_time[index]!=0)
 		if(a[r].burst_time[r]==0&&a[r].stop[r]==0)
 		{
 			system("color 2B");
+			Beep(600,1500);
 			a[r].process_completion_time[r]=time;
 			a[r].stop[r]=1;	
 		}
